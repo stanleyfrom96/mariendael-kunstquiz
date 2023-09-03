@@ -36,7 +36,7 @@ import ExerciseScreen5 from './components/ExerciseScreen5.vue';
 import ResultScreen from './components/ResultScreen.vue';
 import { imageUrls } from './imageLoader';
 import options from './assets/options.json'; // Import the JSON file
-import './styles.scss'; // Import your CSS file
+import './styles.css'; // Import your CSS file
 
 export default {
   components: {
