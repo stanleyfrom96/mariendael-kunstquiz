@@ -1,0 +1,147 @@
+/* Reset some default styles */
+body, h1, h2, p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Use a custom font */
+body {
+  font-family: 'Your Custom Font', sans-serif;
+}
+
+/* Set a background color for the HTML element */
+html {
+  background-color: #eeefe8;
+  text-align: center;
+}
+
+/* Style the container for the app */
+.app {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  font-family: Verdana;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Style the container inside the app */
+.container {
+  background: white;
+  padding: 2rem;
+  border-radius: 2rem;
+  flex-direction: column;
+  display: flex;
+  height: 100%;
+  box-shadow: 0px 8px 20px 4px #16140e1a;
+}
+
+/* Style the exercise heading */
+.exercise-heading {
+  text-align: center;
+  text-transform: uppercase;
+  color: #e0007f;
+  margin-bottom: 10px;
+}
+
+/* Style the exercise description */
+.exercise-description {
+  color: #B0A073;
+  margin-bottom: 20px;
+}
+
+/* Style the exercise container */
+.exercise {
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: stretch;
+  justify-content: space-between;
+  align-self: center;
+}
+
+/* Style images within the grid */
+img {
+  height: 40%;
+  max-height: 400px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Style the image grid */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+/* Style individual images within the grid */
+.image-grid img {
+  height: 100%;
+}
+
+/* Style selected image item */
+.image-item.selected {
+  border: 3px solid #e0027f;
+}
+
+/* Style the button group */
+.button-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 780px) {
+  .button-group {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Style buttons */
+button {
+  flex-grow: 1;
+  border-radius: 1rem;
+  border: none;
+  background-color: #e0007f;
+  color: white;
+  padding-inline: 1.5rem;
+  height: 3rem;
+  max-height: 3rem;
+  min-width: 10rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s, filter 0.3s;
+}
+
+/* Style button hover effect */
+button:hover {
+  background-color: #ff3c8e;
+  filter: brightness(1.1);
+}
+
+/* Style textarea */
+textarea {
+  flex-grow: 1;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+/* Style exercise button active and radio button focus */
+.exercise button:active, .radio-button:focus {
+  background-color: grey;
+}
+
+/* Add a transition for button hover and active states */
+button {
+  transition: background-color 0.3s, filter 0.3s;
+}
