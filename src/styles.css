@@ -4,6 +4,10 @@ body, h1, h2, p {
   padding: 0;
 }
 
+h1 {
+  margin-bottom: 1rem;
+}
+
 /* Use a custom font */
 body {
   font-family: 'Your Custom Font', sans-serif;
@@ -17,11 +21,6 @@ html {
 
 /* Style the container for the app */
 .app {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
   font-family: Verdana;
   max-width: 800px;
   margin: 0 auto;
@@ -37,7 +36,7 @@ html {
   border-radius: 2rem;
   flex-direction: column;
   display: flex;
-  height: 100%;
+  height: 40rem;
   box-shadow: 0px 8px 20px 4px #16140e1a;
 }
 
@@ -61,7 +60,7 @@ html {
   width: 100%;
   flex-grow: 1;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2rem;
   align-items: stretch;
   justify-content: space-between;
   align-self: center;
@@ -69,8 +68,7 @@ html {
 
 /* Style images within the grid */
 img {
-  height: 40%;
-  max-height: 400px;
+  max-height: 16rem;
   max-width: 100%;
   object-fit: contain;
 }
@@ -116,6 +114,7 @@ button {
   color: white;
   padding-inline: 1.5rem;
   height: 3rem;
+  box-shadow: 0px 8px 10px 0px #16140e1a;
   max-height: 3rem;
   min-width: 10rem;
   cursor: pointer;
@@ -123,9 +122,13 @@ button {
   transition: background-color 0.3s, filter 0.3s;
 }
 
+.normal-button:active {
+  background-color: #73214f;
+}
+
 /* Style button hover effect */
-button:hover {
-  background-color: #ff3c8e;
+.normal-button:hover {
+  background-color: #e0007f;
   filter: brightness(1.1);
 }
 
@@ -136,9 +139,24 @@ textarea {
   border-radius: 1rem;
 }
 
-/* Style exercise button active and radio button focus */
-.exercise button:active, .radio-button:focus {
-  background-color: grey;
+.radio-button {
+  border: 2px solid #e0007f;
+  color: #e0007f;
+  background-color: white;
+}
+
+.radio-button.selected-button {
+  background-color: #e0007f;
+  color: white;
+}
+
+.radio-button:hover {
+  background-color: #e0007f2e
+}
+
+.radio-button.selected-button:hover {
+  background-color: #e0007f;
+  filter: brightness(1.1);
 }
 
 /* Add a transition for button hover and active states */

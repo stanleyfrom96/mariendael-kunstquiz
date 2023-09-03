@@ -1,9 +1,11 @@
 <template>
   <div class="button-group">
-    <button v-for="(button, index) in buttons" :key="index" @click="handleButtonClick(button)" :class="{ 'radio-button': radioButton, 'normal-button': !radioButton }">
-      <template v-if="radioButton">
-        <input type="radio" :value="button.value" v-model="selectedValue" />
-      </template>
+    <button
+      v-for="(button, index) in buttons"
+      :key="index"
+      @click="handleButtonClick(button)"
+      :class="{ 'radio-button': radioButton, 'normal-button': !radioButton, 'selected-button': radioButton && isSelected(button.value) }"
+    >
       {{ button.label }}
     </button>
   </div>
@@ -20,21 +22,18 @@ export default {
       selectedValue: null,
     };
   },
-  watch: {
-    selectedValue(newValue) {
-      if (this.radioButton) {
-        this.$emit('button-click', newValue);
-      }
-    },
-  },
   methods: {
     handleButtonClick(button) {
-      if (!this.radioButton) {
-        this.selectedValue = button.value; // Set the selectedValue to the button's value
-        this.$emit('button-click', button.value); // Emit the selected value
-      }
+      this.selectedValue = button.value; // Set the selectedValue to the button's value
+      this.$emit('button-click', button.value); // Emit the selected value
     },
-    
+    isSelected(value) {
+      return this.selectedValue === value;
+    },
   },
 };
 </script>
+
+<style scoped>
+/* Add your component-specific styling here */
+</style>

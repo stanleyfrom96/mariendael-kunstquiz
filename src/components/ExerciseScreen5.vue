@@ -1,6 +1,5 @@
 <template>
   <div class="exercise">
-    <h2>Select Your Favorite Image</h2>
 
     <!-- Display images -->
     <div class="image-grid">
@@ -19,7 +18,7 @@
     <textarea v-model="imageMotivation" placeholder="Explain your choice"></textarea>
 
     <!-- Button to advance to the final results screen, only clickable when motivation is not empty -->
-    <button @click="advanceToSummary" :disabled="!imageMotivation.trim()">Next</button>
+    <button class="normal-button" @click="advanceToSummary" :disabled="!imageMotivation.trim()">Next</button>
   </div>
 </template>
 

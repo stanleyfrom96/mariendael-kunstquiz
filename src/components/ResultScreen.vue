@@ -1,25 +1,23 @@
 <template>
   <div class="result-screen">
-    <h2>Result Summary</h2>
-
     <div class="result-item">
-        <h3>Favorite Category from Exercise 2:</h3>
-        <p><strong>Category:</strong> {{ getFirstFavoriteCategoryLabel }}</p>
-        <p><strong>Reason:</strong> {{ appData.firstMotivation }}</p>
+        <h3>Je favoriete categorie uit Opdracht 2:</h3>
+        <p><strong>Categorie:</strong> {{ getFirstFavoriteCategoryLabel }}</p>
+        <p><strong>Motivatie:</strong> {{ appData.firstMotivation }}</p>
     </div>
 
 
     <div class="result-item">
-      <h3>Your Favorite Image from Exercise 5:</h3>
+      <h3>Je favoriete afbeelding uit Opdracht 5:</h3>
       <img :src="appData.favoriteImage" :alt="appData.favoriteImage" />
       <p><strong>Reason:</strong> {{ appData.imageMotivation }}</p>
     </div>
 
     <div class="result-item">
-        <h3>Images Assigned to Each Category in Exercise 1:</h3>
+        <h3>De verdeling van de afbeeldingen:</h3>
         <ul>
             <li v-for="({ categoryLabel, count }) in sortedImageCounts" :key="categoryLabel">
-            {{ categoryLabel }}: {{ count }} images
+            <b>{{ categoryLabel }}</b> - {{ count }} afbeeldingen
             </li>
         </ul>
     </div>

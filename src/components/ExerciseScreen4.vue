@@ -1,6 +1,5 @@
 <template>
   <div class="exercise">
-    <h2>Select Your Favorite Categories</h2>
 
     <!-- Use ButtonGroup component for selecting favorite categories -->
     <button-group :buttons="secondSelectedOptions" :radioButton="true" @button-click="selectFavoriteCategory" />
@@ -9,7 +8,7 @@
     <textarea v-model="secondMotivation" placeholder="Explain your choice"></textarea>
 
     <!-- Button to advance to the next exercise, only clickable when textarea is not empty -->
-    <button @click="advanceToNextExercise" :disabled="!secondMotivation.trim()">Next</button>
+    <button class="normal-button" @click="advanceToNextExercise" :disabled="!secondMotivation.trim()">Next</button>
   </div>
 </template>
 

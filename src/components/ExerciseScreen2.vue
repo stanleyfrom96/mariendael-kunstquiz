@@ -8,7 +8,7 @@
     <textarea v-model="firstMotivation" placeholder="Explain your choice"></textarea>
 
     <!-- Button to advance to the next exercise, only clickable when textarea is not empty -->
-    <button @click="advanceToNextExercise" :disabled="!firstMotivation.trim()">Next</button>
+    <button class="normal-button" @click="advanceToNextExercise" :disabled="!firstMotivation.trim()">Next</button>
   </div>
 </template>
 

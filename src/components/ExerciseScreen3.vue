@@ -1,14 +1,13 @@
 <template>
   <div class="exercise">
-    <p>Category selected in Exercise 2: {{ selectedFavoriteCategory }}</p>
+
+    <!-- Display progress tracker -->
+    <p>{{ currentIndex + 1 }} / {{ imagesForFirstCategory.length }}</p>
     <!-- Display image -->
     <img :src="currentImage.url" :alt="currentImage.secondCategory" />
 
     <!-- Use ButtonGroup component for categories -->
     <button-group :buttons="secondOptions" @button-click="assignSecondCategoryAndAdvance" />
-
-    <!-- Display progress tracker -->
-    <p>{{ currentIndex + 1 }} / {{ imagesForFirstCategory.length }}</p>
   </div>
 </template>
 
