@@ -4,8 +4,8 @@
     <p class="progress-bar">{{ currentIndex + 1 }} / {{ images.length }}</p>
 
     <!-- Preload the next n images in the background -->
-    <div v-for="index in preloadCount" :key="index">
-      <img :src="nextImages[index].url" style="display: none;" />
+    <div v-for="(nextImage, index) in nextImages" :key="index" style="display: none;">
+      <img :src="nextImage.url" />
     </div>
 
     <!-- Display current image -->
@@ -65,11 +65,9 @@ export default {
     updateNextImages() {
       this.nextImages = [];
       const startIndex = this.currentIndex + 1;
-      for (let i = 0; i < this.preloadCount; i++) {
+      for (let i = 0; i < this.preloadCount && startIndex + i < this.images.length; i++) {
         const nextIndex = startIndex + i;
-        if (nextIndex < this.images.length) {
-          this.nextImages.push(this.images[nextIndex]);
-        }
+        this.nextImages.push(this.images[nextIndex]);
       }
     },
   },
