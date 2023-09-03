@@ -1,15 +1,16 @@
 <template>
-    <div class="exercise">
-      
+  <div class="exercise">
     <!-- Display progress tracker -->
     <p class="progress-bar">{{ currentIndex + 1 }} / {{ images.length }}</p>
 
-    <!-- Display image -->
+    <!-- Preload the next image in the background -->
+    <img :src="nextImage.url" style="display: none;" />
+
+    <!-- Display current image -->
     <img class="image" :src="currentImage.url" :alt="currentImage.firstCategory" />
 
     <!-- Use ButtonGroup component for categories -->
     <button-group class="button-group" :buttons="firstOptions" @button-click="assignFirstCategoryAndAdvance" />
-    
   </div>
 </template>
 
@@ -34,6 +35,15 @@ export default {
   computed: {
     currentImage() {
       return this.images[this.currentIndex];
+    },
+    nextImage() {
+      const nextIndex = this.currentIndex + 1;
+      if (nextIndex < this.images.length) {
+        return this.images[nextIndex];
+      } else {
+        // Return a placeholder image or handle it as needed
+        return { url: 'placeholder.jpg', firstCategory: 'Placeholder' };
+      }
     },
   },
   methods: {
