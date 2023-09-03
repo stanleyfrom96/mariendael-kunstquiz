@@ -3,8 +3,10 @@
     <!-- Display progress tracker -->
     <p class="progress-bar">{{ currentIndex + 1 }} / {{ images.length }}</p>
 
-    <!-- Preload the next image in the background -->
-    <img :src="nextImage.url" style="display: none;" />
+    <!-- Preload the next n images in the background -->
+    <div v-for="index in preloadCount" :key="index">
+      <img :src="nextImages[index].url" style="display: none;" />
+    </div>
 
     <!-- Display current image -->
     <img class="image" :src="currentImage.url" :alt="currentImage.firstCategory" />
@@ -25,26 +27,29 @@ export default {
     appData: Object, // Passed from App.vue
     images: Array, // Passed from App.vue
     firstOptions: Array, // Passed from App.vue
+    preloadCount: Number, // Number of images to preload in advance
   },
   data() {
     return {
       currentIndex: 0,
       selectedFirstCategory: '',
+      nextImages: [], // Array to hold the next images to preload
     };
   },
   computed: {
     currentImage() {
       return this.images[this.currentIndex];
     },
-    nextImage() {
-      const nextIndex = this.currentIndex + 1;
-      if (nextIndex < this.images.length) {
-        return this.images[nextIndex];
-      } else {
-        // Return a placeholder image or handle it as needed
-        return { url: 'placeholder.jpg', firstCategory: 'Placeholder' };
-      }
+  },
+  watch: {
+    currentIndex() {
+      // Update the array of next images to preload
+      this.updateNextImages();
     },
+  },
+  created() {
+    // Initialize the array of next images to preload
+    this.updateNextImages();
   },
   methods: {
     assignFirstCategoryAndAdvance(category) {
@@ -55,6 +60,16 @@ export default {
         this.currentIndex++;
       } else {
         this.$emit('exercise-complete', this.images); // Emit the categorized images
+      }
+    },
+    updateNextImages() {
+      this.nextImages = [];
+      const startIndex = this.currentIndex + 1;
+      for (let i = 0; i < this.preloadCount; i++) {
+        const nextIndex = startIndex + i;
+        if (nextIndex < this.images.length) {
+          this.nextImages.push(this.images[nextIndex]);
+        }
       }
     },
   },
