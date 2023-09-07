@@ -16,7 +16,7 @@
       :secondSelectedOptions="appData.secondSelectedOptions"
       :imagesForFirstCategory="imagesForFirstCategory"
       :imagesForSecondCategory="imagesForSecondCategory"
-      :preloadCount="4"
+      :preloadCount="10"
       @exercise-complete="handleExerciseComplete"
       @assign-first-category="handleAssignFirstCategory"
       @exercise-2-complete="handleExercise2Complete"
