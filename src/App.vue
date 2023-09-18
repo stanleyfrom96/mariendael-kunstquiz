@@ -121,9 +121,14 @@ export default {
     },
   },
   methods: {
-    handleAssignFirstCategory(category, imageIndex) {
-      // Update the selected category in appData for the corresponding image
-      this.appData.images[imageIndex].firstCategory = category;
+    handleAssignFirstCategory(category, imageUrl) {
+      // Find the image with the matching URL
+      const matchingImage = this.appData.images.find(image => image.url === imageUrl);
+
+      if (matchingImage) {
+        // Update the selected category in appData for the matching image
+        matchingImage.firstCategory = category;
+      }
 
       // Find the corresponding option in firstOptions
       const selectedOption = this.appData.firstOptions.find(option => option.value === category);
@@ -133,20 +138,14 @@ export default {
         this.appData.firstSelectedOptions.push(selectedOption);
       }
     },
-    handleExercise2Complete({ firstFavoriteCategory, firstMotivation }) {
-      // Update the corresponding properties in the appData object
-      this.appData.firstFavoriteCategory = firstFavoriteCategory; // Example: "Category 2"
-      this.appData.firstMotivation = firstMotivation;
-      
-      // Update firstImageSelection based on firstFavoriteCategory
-      this.appData.firstImageSelection = this.appData.images.filter(image => image.firstCategory === firstFavoriteCategory.value);
+    handleAssignSecondCategory(category, imageUrl) {
+      // Find the image with the matching URL
+      const matchingImage = this.appData.images.find(image => image.url === imageUrl);
 
-      this.currentExercise++;
-    },
-
-    handleAssignSecondCategory(category, imageIndex) {
-      // Update the selected category in appData for the corresponding image
-      this.appData.images[imageIndex].secondCategory = category;
+      if (matchingImage) {
+        // Update the selected category in appData for the matching image
+        matchingImage.secondCategory = category;
+      }
 
       // Find the corresponding option in secondOptions
       const selectedOption = this.appData.secondOptions.find(option => option.value === category);
@@ -155,6 +154,16 @@ export default {
       if (!this.appData.secondSelectedOptions.some(option => option.value === category)) {
         this.appData.secondSelectedOptions.push(selectedOption);
       }
+    },
+     handleExercise2Complete({ firstFavoriteCategory, firstMotivation }) {
+      // Update the corresponding properties in the appData object
+      this.appData.firstFavoriteCategory = firstFavoriteCategory; // Example: "Category 2"
+      this.appData.firstMotivation = firstMotivation;
+      
+      // Update firstImageSelection based on firstFavoriteCategory
+      this.appData.firstImageSelection = this.appData.images.filter(image => image.firstCategory === firstFavoriteCategory.value);
+
+      this.currentExercise++;
     },
     handleExercise4Complete({ secondFavoriteCategory, secondMotivation }) {
       // Update the corresponding properties in the appData object

@@ -53,8 +53,8 @@ export default {
   },
   methods: {
     assignFirstCategoryAndAdvance(category) {
-      // Emit an event with the category and image index
-      this.$emit('assign-first-category', category, this.currentIndex);
+      // Emit an event with the category, image URL, and image index
+      this.$emit('assign-first-category', category, this.currentImage.url, this.currentIndex);
 
       if (this.currentIndex < this.images.length - 1) {
         this.currentIndex++;

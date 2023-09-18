@@ -1,6 +1,5 @@
 <template>
   <div class="exercise">
-
     <!-- Display progress tracker -->
     <p>{{ currentIndex + 1 }} / {{ imagesForFirstCategory.length }}</p>
     <!-- Display image -->
@@ -37,13 +36,19 @@ export default {
   },
   methods: {
     assignSecondCategoryAndAdvance(category) {
-      // Emit an event with the category and image index
-      this.$emit('assign-second-category', category, this.currentIndex);
+      // Get the current image
+      const currentImage = this.currentImage;
+
+      // Assign the category to the current image based on its URL
+      currentImage.secondCategory = category;
+
+      // Emit an event with the category and image URL
+      this.$emit('assign-second-category', category, currentImage.url);
 
       if (this.currentIndex < this.imagesForFirstCategory.length - 1) {
         this.currentIndex++;
       } else {
-        this.$emit('exercise-complete', this.imagesForFirstCategory); // Emit the categorized imagesForFirstCategory
+        this.$emit('exercise-complete'); 
       }
     },
   },
