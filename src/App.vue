@@ -3,7 +3,7 @@
     <h1>Mariendael Kunstquiz v1</h1>
     <div class="container">
 
-      <h2 class="exercise-heading">Opdracht {{ currentExercise }}</h2>
+      <h2 v-if="currentExercise != 'summary'" class="exercise-heading">Opdracht {{ currentExercise }}</h2>
       <h2 class="exercise-description">{{ currentExerciseHeading }}</h2>
       
       <component
@@ -23,6 +23,7 @@
       @assign-second-category="handleAssignSecondCategory"
       @exercise-4-complete="handleExercise4Complete"
       @exercise-5-complete="handleExercise5Complete"
+      @go-back="goBackOneExercise"
       />
     </div>
   </div>
@@ -180,6 +181,11 @@ export default {
     },
     handleExerciseComplete() {
       this.currentExercise++;
+    },
+    goBackOneExercise() {
+      if (this.currentExercise > 1) {
+        this.currentExercise--;
+      }
     },
   },
 };

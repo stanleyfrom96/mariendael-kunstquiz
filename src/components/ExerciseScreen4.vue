@@ -12,14 +12,19 @@
     <!-- Textarea for motivation -->
     <textarea v-model="secondMotivation" placeholder="Explain your choice"></textarea>
 
+
+     <div class="button-container">
+      <!-- Add a back button -->
+      <button disabled>Terug</button>
+      <button
+        class="normal-button"
+        @click="advanceToNextExercise"
+        :disabled="!secondMotivation.trim()"
+      >
+        Volgende
+      </button>
+    </div>
     <!-- Button to advance to the next exercise, only clickable when textarea is not empty -->
-    <button
-      class="normal-button"
-      @click="advanceToNextExercise"
-      :disabled="!secondMotivation.trim()"
-    >
-      Next
-    </button>
   </div>
 </template>
 

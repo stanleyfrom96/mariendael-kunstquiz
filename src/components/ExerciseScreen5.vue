@@ -17,8 +17,13 @@
     <!-- Textarea for motivation -->
     <textarea v-model="imageMotivation" placeholder="Explain your choice"></textarea>
 
-    <!-- Button to advance to the final results screen, only clickable when motivation is not empty -->
-    <button class="normal-button" @click="advanceToSummary" :disabled="!imageMotivation.trim()">Next</button>
+    <div class="button-container">
+      <!-- Add a back button -->
+      <button class="normal-button" @click="goBack">Terug</button>
+      
+      <!-- Button to advance to the final results screen, only clickable when motivation is not empty -->
+      <button class="normal-button" @click="advanceToSummary" :disabled="!imageMotivation.trim()">Volgende</button>
+    </div>
   </div>
 </template>
 
@@ -46,10 +51,12 @@ export default {
         });
       }
     },
+    goBack() {
+      this.$emit('go-back');
+    },
   },
 };
 </script>
 
 <style scoped>
-/* Add your component-specific styling here */
 </style>

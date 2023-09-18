@@ -36,7 +36,7 @@ html {
   border-radius: 2rem;
   flex-direction: column;
   display: flex;
-  height: 40rem;
+  min-height: 40rem;
   box-shadow: 0px 8px 20px 4px #16140e1a;
 }
 
@@ -98,6 +98,13 @@ img {
   flex-wrap: wrap;
 }
 
+.button-container {
+  display: flex;
+  justify-content: space-between; /* This places the buttons at each end of the container */
+  margin-top: 20px; /* Add margin to separate the buttons from the textarea */
+  gap: 1rem;
+}
+
 /* Media query for smaller screens */
 @media (max-width: 780px) {
   .button-group {
@@ -106,7 +113,7 @@ img {
 }
 
 /* Style buttons */
-button {
+button, .normal-button {
   flex-grow: 1;
   border-radius: 1rem;
   border: none;
@@ -122,14 +129,30 @@ button {
   transition: background-color 0.3s, filter 0.3s;
 }
 
-.normal-button:active {
-  background-color: #73214f;
+/* Style "Next" button */
+.normal-button.next-button {
+  background-color: #007BFF; /* Update with your color */
+}
+
+/* Style "Terug" button */
+.normal-button.back-button {
+  background-color: #e0007f; /* Update with your color */
 }
 
 /* Style button hover effect */
 .normal-button:hover {
-  background-color: #e0007f;
   filter: brightness(1.1);
+}
+
+/* Style button disabled state */
+.normal-button:disabled, button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Add a transition for button hover and active states */
+button, .normal-button {
+  transition: background-color 0.3s, filter 0.3s;
 }
 
 /* Style textarea */
@@ -139,6 +162,7 @@ textarea {
   border-radius: 1rem;
 }
 
+/* Style radio buttons */
 .radio-button {
   border: 2px solid #e0007f;
   color: #e0007f;
@@ -151,15 +175,29 @@ textarea {
 }
 
 .radio-button:hover {
-  background-color: #e0007f2e
+  background-color: #e0007f2e;
 }
+
+.normal-button:active {
+  background-color: #73214f;
+}
+
 
 .radio-button.selected-button:hover {
   background-color: #e0007f;
   filter: brightness(1.1);
 }
 
-/* Add a transition for button hover and active states */
-button {
-  transition: background-color 0.3s, filter 0.3s;
+ul {
+  list-style-type: none;
+}
+
+
+.result-screen {
+  text-align: center;
+  padding: 20px;
+}
+
+.result-item {
+  margin-bottom: 20px;
 }

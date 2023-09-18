@@ -1,34 +1,39 @@
 <template>
-  <div class="result-screen">
+  <div class="result-screen" id="pdf-content">
     <div class="result-item">
         <h3>Je favoriete categorie uit Opdracht 2:</h3>
-        <p><strong>Categorie:</strong> {{ getFirstFavoriteCategoryLabel }}</p>
+        <h4><strong>{{ getFirstFavoriteCategoryLabel }}</strong> </h4>
         <p><strong>Motivatie:</strong> {{ appData.firstMotivation }}</p>
     </div>
 
-
     <div class="result-item">
-      <h3>Je favoriete afbeelding uit Opdracht 5:</h3>
-      <img :src="appData.favoriteImage" :alt="appData.favoriteImage" />
-      <p><strong>Reason:</strong> {{ appData.imageMotivation }}</p>
+        <h3>Je favoriete afbeelding uit Opdracht 5:</h3>
+        <img :src="appData.favoriteImage" :alt="appData.favoriteImage" />
+        <p><strong>Motivatie:</strong> {{ appData.imageMotivation }}</p>
     </div>
 
     <div class="result-item">
         <h3>De verdeling van de afbeeldingen:</h3>
         <ul>
             <li v-for="({ categoryLabel, count }) in sortedImageCounts" :key="categoryLabel">
-            <b>{{ categoryLabel }}</b> - {{ count }} afbeeldingen
+            <b>{{ categoryLabel }}</b> had {{ count }} {{ count === 1 ? 'afbeelding' : 'afbeeldingen' }}
             </li>
         </ul>
     </div>
 
 
+<div class="button-container">
 
-    <button @click="copyResults">Copy Results</button>
+  <button @click="copyResults">Kopiëer resultaten</button>
+  <button @click="shareViaEmail">Deel via Email</button>
+  <button @click="generatePDF">Exporteer PDF</button>
+</div>
   </div>
 </template>
 
 <script>
+import html2pdf from 'html2pdf.js';
+
 export default {
   props: {
     appData: Object, // Passed from App.vue
@@ -60,25 +65,43 @@ export default {
 },
 
   methods: {
-    copyResults() {
-        const results = `
-            Favorite Category from Exercise 2: ${this.firstFavoriteCategoryLabel}
-            Reason: ${this.appData.firstMotivation}
+    async generatePDF() {
+      const content = document.getElementById('pdf-content'); // Replace with the ID of your content
+      console.log('Content:', content);
 
-            Favorite Image from Exercise 5: ${this.appData.favoriteImage}
-            Reason: ${this.appData.imageMotivation}
+      try {
+        const pdfOptions = {
+          margin: 10,
+          filename: 'document.pdf',
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        };
 
-            Images Assigned to Each Category in Exercise 1:
-            ${this.sortedImageCounts
-            .map(({ categoryLabel, count }) => `${categoryLabel}: ${count} images`)
-            .join('\n')}
-        `;
+        const pdf = await html2pdf().from(content).set(pdfOptions).outputPdf();
 
-        // Perform the action to copy/send the results
-        // This could be done using the Clipboard API or sending an email, for example
-        // For simplicity, let's just log the results to the console here
-        console.log(results);
+        // Create a Blob from the PDF data
+        const pdfBlob = new Blob([pdf], { type: 'application/pdf' });
+
+        // Create a URL for the PDF blob
+        const pdfUrl = URL.createObjectURL(pdfBlob);
+
+        // Create a link element to trigger the download
+        const downloadLink = document.createElement('a');
+        downloadLink.href = pdfUrl;
+        downloadLink.download = 'document.pdf';
+
+        // Trigger a click event to start the download
+        downloadLink.click();
+
+        // Clean up by revoking the URL
+        URL.revokeObjectURL(pdfUrl);
+      } catch (error) {
+        console.error('Error generating PDF:', error);
+      }
     },
+
+
 
   },
 };
@@ -86,16 +109,4 @@ export default {
 
 <style scoped>
 /* Add your component-specific styling here */
-.result-screen {
-  text-align: center;
-  padding: 20px;
-}
-
-.result-item {
-  margin-bottom: 20px;
-}
-
-img {
-  max-width: 300px;
-}
 </style>

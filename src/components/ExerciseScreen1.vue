@@ -13,6 +13,13 @@
 
     <!-- Use ButtonGroup component for categories -->
     <button-group class="button-group" :buttons="firstOptions" @button-click="assignFirstCategoryAndAdvance" />
+     <div class="button-container">
+      <!-- Add a back button -->
+      <button class="normal-button" disabled>Terug</button>
+      
+      <!-- Button to advance to the final results screen, only clickable when motivation is not empty -->
+      <button class="normal-button" disabled>Volgende</button>
+    </div>
   </div>
 </template>
 

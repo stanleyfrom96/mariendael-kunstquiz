@@ -7,6 +7,15 @@
 
     <!-- Use ButtonGroup component for categories -->
     <button-group :buttons="secondOptions" @button-click="assignSecondCategoryAndAdvance" />
+
+
+    <div class="button-container">
+      <!-- Add a back button -->
+      <button @click="goBack">Terug</button>
+      <!-- Add a back button -->
+      <button class="normal-button" disabled>Volgende</button>
+    </div>
+    
   </div>
 </template>
 
@@ -57,6 +66,10 @@ export default {
       } else {
         this.$emit('exercise-complete'); 
       }
+    },
+    // Add a method to go back one exercise
+    goBack() {
+      this.$emit('go-back');
     },
   },
 };

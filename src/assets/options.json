@@ -1,15 +1,15 @@
 {
   "firstOptions": [
-    { "label": "🧠 Knap gemaakt!", "value": "category-1" },
-    { "label": "🤩 Wat mooi!", "value": "category-2" },
-    { "label": "🥴 Lelijk.", "value": "category-3" },
-    { "label": "💸 Vast erg duur...", "value": "category-4" },
-    { "label": "🥱 Dat kan ik ook.", "value": "category-5" },
+    { "label": "🧠 Knap gemaakt", "value": "category-1" },
+    { "label": "🤩 Wat mooi", "value": "category-2" },
+    { "label": "🥴 Lelijk", "value": "category-3" },
+    { "label": "💸 Vast erg duur", "value": "category-4" },
+    { "label": "🥱 Dat kan ik ook", "value": "category-5" },
     { "label": "🤔 Dit zet me aan het denken", "value": "category-6" }
   ],
   "secondOptions": [
-    { "label": "Hier zou ik meer van willen zien.", "value": "category-A" },
-    { "label": "Ik zou dit wel willen kunnen maken.", "value": "category-B" },
+    { "label": "Hier zou ik meer van willen zien", "value": "category-A" },
+    { "label": "Ik zou dit wel willen kunnen maken", "value": "category-B" },
     { "label": "Ik wil hier alles van weten", "value": "category-C" },
     { "label": "Deze afbeelding past toch niet bij mijn keuze", "value": "category-D" }
   ]
