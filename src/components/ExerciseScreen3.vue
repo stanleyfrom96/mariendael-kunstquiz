@@ -19,7 +19,8 @@ export default {
   },
   props: {
     appData: Object, // Passed from App.vue
-    imagesForFirstCategory: Array, // Passed from App.vue
+    firstFavoriteCategory: String,
+    images: Array, // Passed from App.vue
     secondOptions: Array, // Passed from App.vue
     selectedFavoriteCategory: String,
   },
@@ -32,6 +33,12 @@ export default {
   computed: {
     currentImage() {
       return this.imagesForFirstCategory[this.currentIndex];
+    },
+    imagesForFirstCategory() {
+      if (this.firstFavoriteCategory) {
+        return this.images.filter(image => image.firstCategory === this.appData.firstFavoriteCategory);
+      }
+      return [];
     },
   },
   methods: {

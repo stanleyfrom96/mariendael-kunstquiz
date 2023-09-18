@@ -14,7 +14,7 @@
       :firstSelectedOptions="appData.firstSelectedOptions"
       :secondOptions="appData.secondOptions"
       :secondSelectedOptions="appData.secondSelectedOptions"
-      :imagesForFirstCategory="imagesForFirstCategory"
+      :firstFavoriteCategory="appData.firstFavoriteCategory"
       :imagesForSecondCategory="imagesForSecondCategory"
       :preloadCount="10"
       @exercise-complete="handleExerciseComplete"
@@ -87,12 +87,6 @@ export default {
       };
 
       return componentMap[this.currentExercise];
-    },
-    imagesForFirstCategory() {
-      if (this.appData.firstFavoriteCategory) {
-        return this.appData.images.filter(image => image.firstCategory === this.appData.firstFavoriteCategory);
-      }
-      return [];
     },
     imagesForSecondCategory() {
       if (this.appData.secondFavoriteCategory) {

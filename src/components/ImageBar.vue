@@ -29,5 +29,7 @@ export default {
 /* Style for individual image items */
 .image-item img {
   height: 50px; /* Add spacing between images */
+  min-width: 50px;
+  object-fit: cover;
 }
 </style>
