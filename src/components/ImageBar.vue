@@ -21,15 +21,24 @@ export default {
 <style scoped>
 .image-bar {
   display: flex;
-  overflow-x: scroll; /* Enable horizontal scrolling if needed */
-  max-height: 50px; /* Set the maximum height of the image bar */
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
   gap: 1rem;
+  padding-bottom: 0 !important;
+  scrollbar-width: none; /* Hide the scrollbar in Firefox */
+  -ms-overflow-style: none; /* Hide the scrollbar in IE/Edge */
+}
+
+/* Hide vertical scrollbar */
+.image-bar::-webkit-scrollbar {
+  width: 0;
+  background: transparent; /* Optional: If you want to hide the scrollbar track */
 }
 
 /* Style for individual image items */
-.image-item img {
+.image-bar .image-item img {
   height: 50px; /* Add spacing between images */
   min-width: 50px;
   object-fit: cover;
+  padding-block: 0 !important;
 }
 </style>

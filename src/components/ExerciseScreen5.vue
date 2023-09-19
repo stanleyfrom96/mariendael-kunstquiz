@@ -15,7 +15,7 @@
     </div>
 
     <!-- Textarea for motivation -->
-    <textarea v-model="imageMotivation" placeholder="Explain your choice"></textarea>
+    <textarea v-model="imageMotivation" placeholder="Leg je keuze uit..."></textarea>
 
     <div class="button-container">
       <!-- Add a back button -->

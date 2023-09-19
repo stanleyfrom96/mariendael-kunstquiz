@@ -1,19 +1,22 @@
 <template>
-  <div class="result-screen" id="pdf-content">
+  <div class="result-screen">
+    <h3 class="name">{{ userName }} {{ userLastName }}</h3>
     <div class="result-item">
-        <h3>Je favoriete categorie uit Opdracht 2:</h3>
-        <h4><strong>{{ getFirstFavoriteCategoryLabel }}</strong> </h4>
-        <p><strong>Motivatie:</strong> {{ appData.firstMotivation }}</p>
+      <h3 class="item-header">Favoriete Categorieën</h3>
+        <p><strong>{{ getFirstFavoriteCategoryLabel }}</strong>, omdat: {{ appData.firstMotivation }} </p>
+        <p><strong>{{ getSecondFavoriteCategoryLabel }}</strong>, omdat: {{ appData.secondMotivation }} </p>
     </div>
 
-    <div class="result-item">
-        <h3>Je favoriete afbeelding uit Opdracht 5:</h3>
-        <img :src="appData.favoriteImage" :alt="appData.favoriteImage" />
+    <div class="result-item image-item">
+        <h3 class="item-header">Favoriete Afbeelding</h3>
+        <div class="image-container">
+          <img :src="appData.favoriteImage" :alt="appData.favoriteImage" />
+        </div>
         <p><strong>Motivatie:</strong> {{ appData.imageMotivation }}</p>
     </div>
 
     <div class="result-item">
-        <h3>De verdeling van de afbeeldingen:</h3>
+        <h3 class="item-header">De Verdeling</h3>
         <ul>
             <li v-for="({ categoryLabel, count }) in sortedImageCounts" :key="categoryLabel">
             <b>{{ categoryLabel }}</b> had {{ count }} {{ count === 1 ? 'afbeelding' : 'afbeeldingen' }}
@@ -21,20 +24,30 @@
         </ul>
     </div>
 
+    <!-- Add input fields for name and last name -->
+    <div class="user-info">
+      <input type="text" id="name" placeholder="Voornaam" v-model="userName" />
+      <input type="text" id="lastName" placeholder="Achternaam" v-model="userLastName" />
+    </div>
+    <div class="button-container">
+      <!-- Disable the share button if name or last name is empty -->
+      <button @click="captureAndShare" :disabled="userName === '' || userLastName === ''">Download resultaten</button>
+    </div>
 
-<div class="button-container">
-
-  <button @click="copyResults">Kopiëer resultaten</button>
-  <button @click="shareViaEmail">Deel via Email</button>
-  <button @click="generatePDF">Exporteer PDF</button>
-</div>
   </div>
 </template>
 
 <script>
-import html2pdf from 'html2pdf.js';
+import html2canvas from 'html2canvas';
 
 export default {
+  data() {
+    return {
+      userName: '',       // User's name
+      userLastName: '',   // User's last name
+      // ... Your other data properties ...
+    };
+  },
   props: {
     appData: Object, // Passed from App.vue
   },
@@ -43,6 +56,11 @@ export default {
     const favoriteCategoryValue = this.appData.firstFavoriteCategory;
     const favoriteCategory = this.appData.firstOptions.find(option => option.value === favoriteCategoryValue);
     return favoriteCategory ? favoriteCategory.label : '';
+  },
+   getSecondFavoriteCategoryLabel() {
+    const secondFavoriteCategoryValue = this.appData.secondFavoriteCategory; // Replace with your actual data property
+    const secondFavoriteCategory = this.appData.secondOptions.find(option => option.value === secondFavoriteCategoryValue);
+    return secondFavoriteCategory ? secondFavoriteCategory.label : '';
   },
   sortedImageCounts() {
     const counts = {};
@@ -65,48 +83,58 @@ export default {
 },
 
   methods: {
-    async generatePDF() {
-      const content = document.getElementById('pdf-content'); // Replace with the ID of your content
-      console.log('Content:', content);
-
-      try {
-        const pdfOptions = {
-          margin: 10,
-          filename: 'document.pdf',
-          image: { type: 'jpeg', quality: 0.98 },
-          html2canvas: { scale: 2 },
-          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        };
-
-        const pdf = await html2pdf().from(content).set(pdfOptions).outputPdf();
-
-        // Create a Blob from the PDF data
-        const pdfBlob = new Blob([pdf], { type: 'application/pdf' });
-
-        // Create a URL for the PDF blob
-        const pdfUrl = URL.createObjectURL(pdfBlob);
-
-        // Create a link element to trigger the download
-        const downloadLink = document.createElement('a');
-        downloadLink.href = pdfUrl;
-        downloadLink.download = 'document.pdf';
-
-        // Trigger a click event to start the download
-        downloadLink.click();
-
-        // Clean up by revoking the URL
-        URL.revokeObjectURL(pdfUrl);
-      } catch (error) {
-        console.error('Error generating PDF:', error);
+    async captureAndShare() {
+      if (this.userName === '' || this.userLastName === '') {
+        // Check if name and last name are empty, and prevent capturing if they are
+        return;
       }
+
+      // Hide the entire user-info section before capturing
+      const userInfoSection = document.querySelector('.user-info');
+      const originalUserInfoDisplay = userInfoSection.style.display;
+      userInfoSection.style.display = 'none';
+      const buttonContainerSection = document.querySelector('.button-container');
+      const originalButtonContainerDisplay = buttonContainerSection.style.display;
+      buttonContainerSection.style.display = 'none';
+
+      // Capture the result section as an image
+      const resultSection = document.getElementById('result-section');
+      const canvas = await html2canvas(resultSection);
+
+      // Restore the display property of the user-info section
+      userInfoSection.style.display = originalUserInfoDisplay;
+      buttonContainerSection.style.display = originalButtonContainerDisplay;
+
+      // Convert the canvas to a data URL
+      const imageDataUrl = canvas.toDataURL('image/png');
+
+      // Create a download link with a filename that includes the user's names
+      const fileName = `Kunstquiz_${this.userName}_${this.userLastName}.png`;
+      const downloadLink = document.createElement('a');
+      downloadLink.href = imageDataUrl;
+      downloadLink.download = fileName;
+      downloadLink.click();
     },
-
-
-
   },
 };
 </script>
 
 <style scoped>
 /* Add your component-specific styling here */
+h3 {
+  margin-top: 0;
+}
+
+.user-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.user-info input {
+  width: auto;
+  padding: 1rem;
+  border: 1px solid black;
+  border-radius: 1rem;
+}
 </style>

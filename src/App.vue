@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <h1>Mariendael Kunstquiz</h1>
-    <div class="container">
+    <div class="container" id="result-section">
 
       <h2 v-if="currentExercise != 'summary'" class="exercise-heading">Opdracht {{ currentExercise }}</h2>
       <h2 class="exercise-description">{{ currentExerciseHeading }}</h2>
@@ -109,7 +109,7 @@ export default {
           return 'Kies de afbeelding die het meest met je doet';
         // ... add headings for other exercises ...
         case 'summary':
-          return 'Het Resultaat';
+          return 'Kunstquiz Samenvatting';
         default:
           return 'Onbekende Opdracht';
       }

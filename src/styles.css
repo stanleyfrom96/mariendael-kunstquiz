@@ -5,7 +5,7 @@ body, h1, h2, p {
 }
 
 h1 {
-  margin-bottom: 1rem;
+  margin-block: 2rem;
 }
 
 /* Use a custom font */
@@ -22,11 +22,16 @@ html {
 /* Style the container for the app */
 .app {
   font-family: Verdana;
-  max-width: 800px;
+  max-width: min(70rem, 95%);
   margin: 0 auto;
-  padding: 20px;
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: 780px) {
+  .app{
+    max-width: min(70rem, 85%);
+  }
 }
 
 /* Style the container inside the app */
@@ -51,16 +56,16 @@ html {
 /* Style the exercise description */
 .exercise-description {
   color: #B0A073;
-  margin-bottom: 20px;
 }
 
 /* Style the exercise container */
 .exercise {
   display: flex;
   width: 100%;
+  padding: 1rem;
   flex-grow: 1;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   align-items: stretch;
   justify-content: space-between;
   align-self: center;
@@ -87,7 +92,11 @@ img {
 
 /* Style selected image item */
 .image-item.selected {
-  border: 3px solid #e0027f;
+  outline: 3px solid #e0027f;
+}
+
+.result-item .image-container {
+  padding-block: 1rem;
 }
 
 /* Style the button group */
@@ -101,7 +110,7 @@ img {
 .button-container {
   display: flex;
   justify-content: space-between; /* This places the buttons at each end of the container */
-  margin-top: 20px; /* Add margin to separate the buttons from the textarea */
+  margin-top: 1rem; /* Add margin to separate the buttons from the textarea */
   gap: 1rem;
 }
 
@@ -160,6 +169,7 @@ textarea {
   flex-grow: 1;
   padding: 1rem;
   border-radius: 1rem;
+  margin-top: 1rem;
 }
 
 /* Style radio buttons */
@@ -189,15 +199,53 @@ textarea {
 }
 
 ul {
-  list-style-type: none;
+    list-style-type: none;
+    padding-left: 0;
 }
 
-
 .result-screen {
-  text-align: center;
+  text-align: left;
   padding: 20px;
 }
 
 .result-item {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
+    /* border: 1px solid black; */
+    /* box-shadow: inset 0px 8px 10px 0px #16140e1a; */
+    background: #eeeeee;
+    padding: 1.5rem 2rem;
+    box-shadow: 1px solid 1px;
+    border-radius: 2rem 2rem 2rem 0rem;
+}
+
+.result-item p {
+  margin-bottom: 1rem;
+}
+
+.item-header {
+    /* font-size: 1.4rem; */
+    color: #e0027f;
+}
+
+.image-item img {
+    margin: auto;
+    width: 100%;
+    object-fit: cover;
+}
+
+.name {
+  text-align: center;
+}
+
+.image-container {
+  width: 300px; /* Adjust this value to your desired width */
+  /* You can set a max-height to maintain the aspect ratio */
+  max-height: 100%;
+  margin: auto;
+  overflow: hidden; /* Hide any overflow if the image is larger than the container */
+}
+
+.image-container img {
+  width: 100%;
+  height: auto; /* Let the height adjust automatically to maintain aspect ratio */
 }

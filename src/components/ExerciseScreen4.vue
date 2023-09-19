@@ -10,7 +10,7 @@
     />
 
     <!-- Textarea for motivation -->
-    <textarea v-model="secondMotivation" placeholder="Explain your choice"></textarea>
+    <textarea v-model="secondMotivation" placeholder="Leg je keuze uit..."></textarea>
 
 
      <div class="button-container">
