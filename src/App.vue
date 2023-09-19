@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <h1>Mariendael Kunstquiz v1</h1>
+    <h1>Mariendael Kunstquiz</h1>
     <div class="container">
 
       <h2 v-if="currentExercise != 'summary'" class="exercise-heading">Opdracht {{ currentExercise }}</h2>
