@@ -2,7 +2,7 @@
   <div class="exercise">
 
     <!-- Display images -->
-    <div class="image-grid">
+    <div class="image-grid" :style="{ gridTemplateColumns: gridColumns }">
       <div
         v-for="(image, index) in imagesForSecondCategory"
         :key="index"
@@ -36,7 +36,16 @@ export default {
     return {
       favoriteImage: '', // Store the URL of the selected favorite image
       imageMotivation: '',
+      maxColumns: 8, // Maximum number of columns
     };
+  },
+  computed: {
+    gridColumns() {
+      // Calculate the grid columns dynamically based on the maximum number of columns
+      const totalImages = this.imagesForSecondCategory.length;
+      const columns = Math.min(this.maxColumns, totalImages);
+      return `repeat(${columns}, 1fr)`;
+    },
   },
   methods: {
     selectImage(imageUrl) {
