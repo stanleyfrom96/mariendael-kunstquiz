@@ -8,8 +8,10 @@
       <img :src="nextImage.url" />
     </div>
 
-    <!-- Display current image -->
-    <img class="image" :src="currentImage.url" :alt="currentImage.firstCategory" />
+    <div class="image-container">
+      <!-- Display current image -->
+      <img class="image" :src="currentImage.url" :alt="currentImage.firstCategory" />
+    </div>
 
     <!-- Use ButtonGroup component for categories -->
     <button-group class="button-group" :buttons="firstOptions" @button-click="assignFirstCategoryAndAdvance" />

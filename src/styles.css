@@ -25,6 +25,7 @@ html {
   max-width: min(70rem, 95%);
   margin: 0 auto;
   display: flex;
+  touch-action: pan-y;
   flex-direction: column;
 }
 
@@ -115,9 +116,34 @@ img {
 
 /* Media query for smaller screens */
 @media (max-width: 780px) {
-  .button-group {
-    grid-template-columns: repeat(2, 1fr);
+  h1 {
+    font-size: 1.3rem;
+    margin-block: 1rem;
   }
+
+  .exercise-description {
+    font-size: 1rem;
+  }
+
+  .exercise {
+    gap: 0.8rem;
+  }
+
+  .progress-bar {
+    font-size: 0.8rem;
+  }
+
+  .button-group, .button-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0.5rem;
+  }
+
+  .container {
+    padding: 1.3rem;
+  }
+
+  
 }
 
 /* Style buttons */
@@ -236,12 +262,23 @@ ul {
   text-align: center;
 }
 
-.image-container {
+.result-item .image-container {
   width: 300px; /* Adjust this value to your desired width */
   /* You can set a max-height to maintain the aspect ratio */
   max-height: 100%;
   margin: auto;
   overflow: hidden; /* Hide any overflow if the image is larger than the container */
+}
+
+.exercise .image-container {
+  height: 15rem; /* Set the desired fixed height for the image container */
+  overflow: hidden; /* Hide any overflow if the image is larger */
+}
+
+.exercise .image-container img {
+  width: 100%; /* Maintain the image's aspect ratio */
+  height: 100%; /* Allow the height to adjust based on the image's aspect ratio */
+  object-fit: contain;
 }
 
 .image-container img {
