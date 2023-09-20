@@ -38,7 +38,7 @@ export default {
 .image-bar .image-item img {
   height: 50px; /* Add spacing between images */
   min-width: 50px;
-  object-fit: cover;
+  object-fit: contain;
   padding-block: 0 !important;
 }
 </style>
