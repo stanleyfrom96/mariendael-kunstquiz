@@ -2,9 +2,14 @@
   <div class="exercise">
     <!-- Display progress tracker -->
     <p>{{ currentIndex + 1 }} / {{ imagesForFirstCategory.length }}</p>
-    <!-- Display image -->
-    <img :src="currentImage.url" :alt="currentImage.secondCategory" />
 
+
+    <div class="image-container">
+       <!-- Display image -->
+       <img :src="currentImage.url" :alt="currentImage.secondCategory" />
+    </div>
+
+    
     <!-- Use ButtonGroup component for categories -->
     <button-group :buttons="secondOptions" @button-click="assignSecondCategoryAndAdvance" />
 
